@@ -1,0 +1,15 @@
+extends layout.pug
+
+block head
+  title Login
+
+block content
+  main
+    .container
+      form(action="/signin", method="post").card
+        .card-content
+          span.card-title Login
+            input(type="email", name="email", placeholder="E-mail")
+            input(type="password", name="password", placeholder="Password")
+        .card-action
+          input(type="submit", value="sign in", class="btn")

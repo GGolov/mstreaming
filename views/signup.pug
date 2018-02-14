@@ -1,0 +1,19 @@
+extends layout.pug
+
+block head
+  title Login
+
+block content
+  main
+    .container
+      form(action="/signup", method="post").card
+        .card-content
+          span.card-title Login
+            input(type="email", name="email", placeholder="E-mail")
+            input(type="password", name="password", placeholder="Password")
+            input(type="password", name="confirmPassword", placeholder="Confirm password")
+            if errors
+              each error in errors
+                h6(class="red-text")= error.msg
+        .card-action
+          input(type="submit", value="sign up", class="btn")
