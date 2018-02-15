@@ -1,6 +1,5 @@
-const crypto = require('crypto')
 const mongoose = require('mongoose')
-const passwordHash = require('password-hash')
+const bcrypt = require('bcrypt')
 
 mongoose.connect('mongodb://localhost/musicstreaming')
 
@@ -13,7 +12,8 @@ const UserSchema = mongoose.Schema({
   },
   email: {
     type: String,
-    index: true
+    index: true,
+    unique: true
   },
   password: {
     type: String
@@ -22,16 +22,17 @@ const UserSchema = mongoose.Schema({
     type: String
   },
   registrationDate: {
-    type: Date
+    type: Date,
+    default: Date.now
   }
 })
 
 const User = module.exports = mongoose.model('User', UserSchema)
 
 module.exports.createUser = (newUser, callback) => {
-  const values = passwordHash.sha512(newUser.password)
-
-  newUser.password = values.passwordHash
-  newUser.salt = values.salt
-  newUser.save(callback)
+  bcrypt.genSalt(12, (err, salt) => {
+    bcrypt.hash(newUser.password, salt, (err, hash) => {
+      
+    })
+  })
 }
