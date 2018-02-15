@@ -1,10 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
-mongoose.connect('mongodb://localhost/musicstreaming')
-
-const db = mongoose.connection
-
 const UserSchema = mongoose.Schema({
   name: {
     type: String,
