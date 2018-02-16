@@ -2,8 +2,6 @@ const fs = require('fs')
 const url = require('url')
 const path = require('path')
 const bodyParser = require('body-parser')
-const mongodb = require('mongodb')
-const mongoose = require('mongoose')
 const passport = require('passport')
 const helmet = require('helmet')
 const session = require('express-session')
@@ -23,11 +21,6 @@ const app = express()
 
 // Global variables and constants
 const port = process.env.PORT || 3000
-
-// Database connection
-mongoose.connect('mongodb://localhost:27017/musicstreaming')
-
-let db = mongoose.connection
 
 // Template engine sets
 app.set('view engine', 'pug')

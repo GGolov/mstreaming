@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const user = require('../models/user')
+const mongoose = require('mongoose')
+const User = require('../models/user')
 
 router.get('/', (req, res) => {
   res.render('signup')
@@ -26,19 +27,17 @@ router.post('/', (req, res) => {
     })
   }
   else {
-    const newUser = new User({
+    let newUser = new User({
       name: username,
       email: email,
-      password: password,
-      registrationDate: new Date()
+      password: password
     })
 
-    user.newUser(newUser, (err, user) => {
-      if (err) throw err
-      console.log(user)
-    })
+    User.createUser(newUser)
 
     console.log(`Registration of ${email} completed successfully`)
+
+    res.redirect('/signin')
   }
 })
 

@@ -1,14 +1,15 @@
 extends layout.pug
 
 block head
-  title Login
+  title Sign up
 
 block content
   main
     .container
-      form(action="/signup", method="post").card
+      form(action="/signup", method="post").card.sign-card
         .card-content
-          span.card-title Login
+          span.card-title Sign up
+            input(type="text", name="username", placeholder="Username")
             input(type="email", name="email", placeholder="E-mail")
             input(type="password", name="password", placeholder="Password")
             input(type="password", name="confirmPassword", placeholder="Confirm password")

@@ -1,21 +1,23 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const db = mongoose.connection
 
 const UserSchema = mongoose.Schema({
   name: {
     type: String,
-    index: true
+    index: true,
+    required: true
   },
   email: {
     type: String,
     index: true,
-    unique: true
+    unique: true,
+    required: true
   },
   password: {
-    type: String
-  },
-  salt: {
-    type: String
+    type: String,
+    required: true,
+    bcrypt: true
   },
   registrationDate: {
     type: Date,
@@ -25,10 +27,14 @@ const UserSchema = mongoose.Schema({
 
 const User = module.exports = mongoose.model('User', UserSchema)
 
+/**
+ * Creates a new user.
+ * @param {*} newUser User object.
+ * @param {*} callback Function.
+ */
 module.exports.createUser = (newUser, callback) => {
-  bcrypt.genSalt(12, (err, salt) => {
-    bcrypt.hash(newUser.password, salt, (err, hash) => {
-      
-    })
+  bcrypt.hash(newUser.password, 12, (err, hash) => {
+    newUser.password = hash
+    User.create(newUser, callback)
   })
 }

@@ -6,10 +6,12 @@ block head
 block content
   main
     .container
-      form(action="/signin", method="post").card
+      form(action="/signin", method="post").card.sign-card
         .card-content
           span.card-title Login
             input(type="email", name="email", placeholder="E-mail")
             input(type="password", name="password", placeholder="Password")
+            if error
+              h6(class="red-text")= error
         .card-action
           input(type="submit", value="sign in", class="btn")
