@@ -35,6 +35,9 @@ const User = module.exports = mongoose.model('User', UserSchema)
 module.exports.createUser = (newUser, callback) => {
   bcrypt.hash(newUser.password, 12, (err, hash) => {
     newUser.password = hash
-    User.create(newUser, callback)
+
+    console.log(`Password of ${newUser.email} hashed`)
+
+    User.create(newUser)
   })
 }

@@ -33,11 +33,7 @@ router.post('/', (req, res) => {
       password: password
     })
 
-    User.createUser(newUser)
-
-    console.log(`Registration of ${email} completed successfully`)
-
-    res.redirect('/signin')
+    newUser.save()
   }
 })
 
