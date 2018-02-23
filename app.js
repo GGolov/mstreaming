@@ -1,5 +1,4 @@
 const fs = require('fs')
-const url = require('url')
 const path = require('path')
 const bodyParser = require('body-parser')
 const passport = require('passport')
@@ -9,6 +8,7 @@ const validator = require('express-validator')
 const cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
 const express = require('express')
+const spdy = require('spdy')
 
 // Custom modules
 const requestLog = require('./modules/request-log')
@@ -21,6 +21,10 @@ const app = express()
 
 // Global variables and constants
 const port = process.env.PORT || 3000
+const options = {
+  key: fs.readFileSync(path.join(__dirname, 'keys/devkey.key')),
+  cert: fs.readFileSync(path.join(__dirname, 'keys/devcert.crt'))
+}
 
 // Template engine sets
 app.set('view engine', 'pug')
@@ -76,6 +80,6 @@ app.use(passport.session())
 // Routes
 app.use(routes)
 
-app.listen(port, () => {
+spdy.createServer(options, app).listen(port, () => {
   console.log(`Server listening on port ${port}`)
 })
