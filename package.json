@@ -24,6 +24,7 @@
     "mongoose": "^5.0.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "pug": "^2.0.0-rc.4"
+    "pug": "^2.0.0-rc.4",
+    "spdy": "^3.4.7"
   }
 }
