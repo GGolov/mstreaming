@@ -8,8 +8,8 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  let email = req.body.email
-  let password = req.body.password
+  const email = req.body.email
+  const password = req.body.password
 
   mongoose.connect('mongodb://localhost:27017/musicstreaming')
 

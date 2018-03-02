@@ -7,10 +7,10 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  let username = req.body.username
-  let email = req.body.email
-  let password = req.body.password
-  let confirmPassword = req.body.confirmPassword
+  const username = req.body.username
+  const email = req.body.email
+  const password = req.body.password
+  const confirmPassword = req.body.confirmPassword
 
   // Validation
   req.checkBody('username', 'Username is required').notEmpty()
@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
   req.checkBody('password', 'Password is required').notEmpty()
   req.checkBody('confirmPassword', 'Passwords do not match').equals(password)
 
-  let errors = req.validationErrors()
+  const errors = req.validationErrors()
 
   if (errors) {
     res.render('signup', {
@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
     })
   }
   else {
-    let newUser = new User({
+    const newUser = new User({
       name: username,
       email: email,
       password: password

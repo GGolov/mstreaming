@@ -9,9 +9,13 @@ block content
       form(action="/signin", method="post").card.sign-card
         .card-content
           span.card-title Login
-            input(type="email", name="email", placeholder="E-mail")
-            input(type="password", name="password", placeholder="Password")
-            if error
-              h6(class="red-text")= error
+          .input-field
+            input(type="email", id="email", name="email", class="validate")
+            label(for="email") E-mail
+          .input-field
+            input(type="password", id="password", name="password")
+            label(for="password") Password
+          if error
+            h6(class="red-text")= error
         .card-action
           input(type="submit", value="sign in", class="btn")
