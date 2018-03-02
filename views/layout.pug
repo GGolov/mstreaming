@@ -6,10 +6,16 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.3/css/materialize.min.css")
     link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Roboto")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
     link(rel="stylesheet", href="./css/style.css")
     block head
   body
     include navbar.pug
+
+    ul#slide-out.sidenav
+      li
+        .user-view
+          .background.blue.lighten-2
 
     block content
 
