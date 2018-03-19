@@ -27,59 +27,63 @@ const options = {
 }
 
 // Template engine sets
-app.set('view engine', 'pug')
-app.set('views', path.join(__dirname, 'views'))
+app
+  .set('view engine', 'pug')
+  .set('views', path.join(__dirname, 'views'))
 
 // Set static folder
-app.use(express.static(path.join(__dirname, 'public')))
+  .use(express.static(path.join(__dirname, 'public')))
 
 // Parsers
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use(cookieParser())
+  .use(bodyParser.urlencoded({ extended: false }))
+  .use(bodyParser.json())
+  .use(cookieParser())
 
 // Validation
-app.use(validator({
-  errorFormatter: (param, msg, value) => {
-    let namespace = param.split('.')
-    let root = namespace.shift()
-    let formParam = root
+  .use(validator({
+    errorFormatter: (param, msg, value) => {
+      let namespace = param.split('.')
+      let root = namespace.shift()
+      let formParam = root
 
-    while (namespace.length) {
-      formParam += '[' + namespace.shift() + ']'
-    }
+      while (namespace.length) {
+        formParam += '[' + namespace.shift() + ']'
+      }
 
-    return {
-      param: formParam,
-      msg: msg,
-      value: value
+      return {
+        param: formParam,
+        msg: msg,
+        value: value
+      }
     }
-  }
-}))
+  }))
 
 // Connect flash
-app.use(flash())
+  .use(flash())
 
 // Helmet
-app.use(helmet())
+  .use(helmet())
 
 // Request log
-app.use(requestLog)
+  .use(requestLog)
 
 // Session
-app.use(session({
-  secret: 'secret',
-  saveUninitialized: true,
-  resave: true
-}))
+  .use(session({
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: true
+  }))
 
 // Passport
-app.use(passport.initialize())
-app.use(passport.session())
+  .use(passport.initialize())
+  .use(passport.session())
 
 // Routes
-app.use(routes)
+  .use(routes)
 
-spdy.createServer(options, app).listen(port, () => {
-  console.log(`Server listening on port ${port}`)
-})
+// Server creation
+spdy
+  .createServer(options, app)
+  .listen(port, () => {
+    console.log(`Server listening on port ${port}`)
+  })
