@@ -1,3 +1,4 @@
+'use strict'
 const router = require('express').Router()
 const mongoose = require('mongoose')
 const User = require('../models/user')
@@ -33,8 +34,14 @@ router.post('/', (req, res) => {
       password: password
     })
 
-    newUser.save()
+    newUser.save((err, savedUser) => {
+      if (!err) {
+        console.log(`User ${savedUser.name} created successfully`)
+      }
+    })
   }
+
+  res.redirect('/')
 })
 
 module.exports = router
