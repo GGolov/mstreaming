@@ -11,14 +11,12 @@ const flash = require('connect-flash')
 const express = require('express')
 const spdy = require('spdy')
 
-// Custom modules
-const requestLog = require('./modules/request-log')
-
 // Routes import
-const routes = require('./routes/routes')
+const routes = require('./routes')
 
 // App init
 const app = express()
+const httpApp = express()
 
 // Global variables and constants
 const port = process.env.PORT || 3000
@@ -26,6 +24,13 @@ const options = {
   key: fs.readFileSync(path.join(__dirname, 'keys/devkey.key')),
   cert: fs.readFileSync(path.join(__dirname, 'keys/devcert.crt'))
 }
+
+// Redirect to https URLs
+httpApp
+  .get('*', (req, res) => {
+    res.redirect(`https://${req.hostname}:${port}${req.url}`)
+  })
+  .listen(80)
 
 // Template engine sets
 app
@@ -66,13 +71,18 @@ app
   .use(helmet())
 
 // Request log
-  .use(requestLog)
+  .use((req, res, next) => {
+    let date = new Date().toISOString()
+  
+    console.log(`${date} ${req.protocol} ${req.method} request to ${req.url} by ${req.ip}`)
+    next()
+  })
 
 // Session
   .use(session({
     secret: 'secret',
-    saveUninitialized: true,
-    resave: true
+    saveUninitialized: false,
+    resave: false
   }))
 
 // Passport

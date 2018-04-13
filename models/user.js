@@ -1,24 +1,19 @@
 'use strict'
-const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
-const db = mongoose.connection
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-const UserSchema = mongoose.Schema({
-  name: {
-    type: String,
-    index: true,
-    required: true
-  },
+const UserSchema = new Schema({
   email: {
     type: String,
-    index: true,
-    unique: true,
+    index: {
+      unique: true
+    },
     required: true
   },
-  password: {
+  passwordHash: {
     type: String,
-    required: true,
-    bcrypt: true
+    required: true
   },
   registrationDate: {
     type: Date,
@@ -26,19 +21,22 @@ const UserSchema = mongoose.Schema({
   }
 })
 
-const User = module.exports = mongoose.model('User', UserSchema)
+UserSchema.pre('save', function(next) {
+  const user = this
 
-/**
- * Creates a new user.
- * @param {*} newUser User object.
- * @param {*} callback Function.
- */
-module.exports.createUser = (newUser, callback) => {
-  bcrypt.hash(newUser.password, 12, (err, hash) => {
-    newUser.password = hash
+  bcrypt.genSalt(12, (err, salt) => {
+      bcrypt.hash(user.passwordHash, salt, (err, hash) => {
+        user.passwordHash = hash
+      })
+  })
+})
 
-    console.log(`Password of ${newUser.email} hashed`)
-
-    User.create(newUser)
+UserSchema.methods.comparePassword = function(newPassword, next) {
+  bcrypt.compare(newPassword, this.password, (err, isMatch) => {
+    if (err) return next(err)
+    
+    next(null, isMatch)
   })
 }
+
+module.exports = mongoose.model('User', UserSchema)
