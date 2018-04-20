@@ -4,25 +4,24 @@ block head
   title Sign up
 
 block content
-  main
-    .container
-      form(action="/signup", method="post").card.sign-card
-        .card-content
-          span.card-title Sign up
-          .input-field
-            input(type="text", name="username", id="username", class="validate", required)
-            label(for="username") Username
-          .input-field
-            input(type="email", name="email", id="email", class="validate", required)
-            label(for="email") E-mail
-          .input-field
-            input(type="password", name="password", id="password", class="validate", required)
-            label(for="password") Password
-          .input-field
-            input(type="password", name="confirmPassword", id="confirmPassword", class="validate", required)
-            label(for="confirmPassword") Confirm password
-          if errors
-            each error in errors
-              h6(class="red-text")= error.msg
-        .card-action
-          input(type="submit", value="sign up", class="btn")
+  .container
+    form(action="/signup", method="post").card.sign-card
+      .card-content
+        span.card-title Sign up
+        .input-field
+          input(type="text", name="username", id="username", class="validate", required)
+          label(for="username") Username
+        .input-field
+          input(type="email", name="email", id="email", class="validate", required)
+          label(for="email") E-mail
+        .input-field
+          input(type="password", name="password", id="password", class="validate", required)
+          label(for="password") Password
+        .input-field
+          input(type="password", name="confirmPassword", id="confirmPassword", class="validate", required)
+          label(for="confirmPassword") Confirm password
+        if errors
+          each error in errors
+            h6(class="red-text")= error.msg
+      .card-action
+        input(type="submit", value="sign up", class="btn")

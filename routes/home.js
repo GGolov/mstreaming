@@ -1,8 +1,11 @@
 'use strict'
 const router = require('express').Router()
+const isAuthenticated = require('../authentication/middleware')
 
-router.get('/', (req, res) => {
-  res.render('home')
-})
+module.exports = (passport) => {
+  router.get('/', (req, res) => {
+    res.render('home')
+  })
 
-module.exports = router
+  return router
+}

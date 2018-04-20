@@ -10,9 +10,11 @@ const cookieParser = require('cookie-parser')
 const flash = require('connect-flash')
 const express = require('express')
 const spdy = require('spdy')
+const mongoose = require('mongoose')
+const initPassport = require('./authentication/init')
 
 // Routes import
-const routes = require('./routes')
+const router = require('./router')
 
 // App init
 const app = express()
@@ -24,6 +26,8 @@ const options = {
   key: fs.readFileSync(path.join(__dirname, 'keys/devkey.key')),
   cert: fs.readFileSync(path.join(__dirname, 'keys/devcert.crt'))
 }
+
+mongoose.connect('mongodb://localhost:27017/musicstreaming')
 
 // Redirect to https URLs
 httpApp
@@ -72,25 +76,31 @@ app
 
 // Request log
   .use((req, res, next) => {
-    let date = new Date().toISOString()
-  
-    console.log(`${date} ${req.protocol} ${req.method} request to ${req.url} by ${req.ip}`)
+    console.log(`${new Date().toISOString()} ${req.protocol} ${req.method} request to ${req.url} by ${req.ip}`)
     next()
   })
 
 // Session
   .use(session({
-    secret: 'secret',
-    saveUninitialized: false,
-    resave: false
+    secret: 'secretkey',
+    resave: false,
+    saveUninitialized: false
   }))
 
 // Passport
   .use(passport.initialize())
   .use(passport.session())
 
-// Routes
-  .use(routes)
+// Router
+  .use(router(passport))
+
+// Error 404
+  .use((req, res, next) => {
+    res.status = 404
+    res.render('error', { error: res.status })
+  })
+
+initPassport(passport)
 
 // Server creation
 spdy

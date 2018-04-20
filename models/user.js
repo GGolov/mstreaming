@@ -4,39 +4,45 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
-  email: {
-    type: String,
-    index: {
-      unique: true
+  local: {
+    email: {
+      type: String,
+      required: true,
+      index: true
     },
-    required: true
+    password: {
+      type: String,
+      require: true
+    }
   },
-  passwordHash: {
-    type: String,
-    required: true
+
+  facebook: {
+      id: String,
+      token: String,
+      name: String,
+      email: String
   },
+
+  twitter: {
+    id: String,
+    token: String,
+    displayName: String,
+    username: String
+  },
+
+  google: {
+    id: String,
+    token: String,
+    email: String,
+    name: String
+  },
+
   registrationDate: {
     type: Date,
     default: Date.now
   }
 })
 
-UserSchema.pre('save', function(next) {
-  const user = this
-
-  bcrypt.genSalt(12, (err, salt) => {
-      bcrypt.hash(user.passwordHash, salt, (err, hash) => {
-        user.passwordHash = hash
-      })
-  })
-})
-
-UserSchema.methods.comparePassword = function(newPassword, next) {
-  bcrypt.compare(newPassword, this.password, (err, isMatch) => {
-    if (err) return next(err)
-    
-    next(null, isMatch)
-  })
-}
+UserSchema.pre('save')
 
 module.exports = mongoose.model('User', UserSchema)
