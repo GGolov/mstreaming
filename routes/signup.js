@@ -8,8 +8,8 @@ module.exports = (passport) => {
     res.render('signup')
   })
   
-  router.post('/', passport.authenticate('signup', {
-    successRedirect: '/',
+  router.post('/', passport.authenticate('local-signup', {
+    successRedirect: '/profile',
     failureRedirect: '/signup',
     failureFlash: true
   }))

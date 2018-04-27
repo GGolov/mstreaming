@@ -4,12 +4,19 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/user')
 
+const createHash = (password) => {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(12), null)
+}
+
 module.exports = (passport) => {
-  passport.use('signup', new LocalStrategy(
-  { passReqToCallback: true },
+  passport.use('local-signup', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true
+  },
   (req, email, password, done) => {
-    const findOrCreateUser = () => {
-      User.findOne({ 'email': email }, (err, user) => {
+    process.nextTick(() => {
+      User.findOne({ 'local.email': email }, (err, user) => {
         if (err) {
           return done(err)
         }
@@ -21,27 +28,23 @@ module.exports = (passport) => {
           )
         }
         else {
-          const newUser = new User({
-            'email': email,
-            'password': createHash(password)
-          })
+          const newUser = new User()
+
+          newUser.local.name = req.body.username
+          newUser.local.email = email
+          newUser.local.password = createHash(password)
 
           newUser.save((err) => {
             if (err) {
               throw err
             }
-            console.log(`${newUser.email} registered`)
+
+            console.log(`${new Date().toISOString()} ${newUser.email} registered as local`)
 
             return done(null, newUser)
           })
         }
       })
-    }
-
-    process.nextTick(findOrCreateUser)
+    })
   }))
-
-  const createHash = (password) => {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null)
-  }
 }

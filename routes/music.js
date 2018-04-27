@@ -1,10 +1,11 @@
 'use strict'
+const fs = require('fs')
 const router = require('express').Router()
 const isAuthenticated = require('../authentication/middleware')
 
 module.exports = (passport) => {
-  router.get('/', isAuthenticated, (req, res) => {
-    res.render('profile', { email: req.user.local.email })
+  router.get('/', (req, res) => {
+    
   })
 
   return router

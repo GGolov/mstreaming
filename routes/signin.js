@@ -9,8 +9,8 @@ module.exports = (passport) => {
     res.render('signin')
   })
   
-  router.post('/', passport.authenticate('login', {
-    successRedirect: '/',
+  router.post('/', passport.authenticate('local-signin', {
+    successRedirect: '/profile',
     failureRedirect: '/signin',
     failureFlash: true
   }))

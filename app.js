@@ -12,6 +12,7 @@ const express = require('express')
 const spdy = require('spdy')
 const mongoose = require('mongoose')
 const initPassport = require('./authentication/init')
+const dbConfig = require('./dbconfig')
 
 // Routes import
 const router = require('./router')
@@ -27,7 +28,7 @@ const options = {
   cert: fs.readFileSync(path.join(__dirname, 'keys/devcert.crt'))
 }
 
-mongoose.connect('mongodb://localhost:27017/musicstreaming')
+mongoose.connect(dbConfig.localUrl)
 
 // Redirect to https URLs
 httpApp
@@ -82,9 +83,7 @@ app
 
 // Session
   .use(session({
-    secret: 'secretkey',
-    resave: false,
-    saveUninitialized: false
+    secret: 'secretkey'
   }))
 
 // Passport
@@ -100,6 +99,7 @@ app
     res.render('error', { error: res.status })
   })
 
+// Passport configuration
 initPassport(passport)
 
 // Server creation

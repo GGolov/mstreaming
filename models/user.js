@@ -5,9 +5,15 @@ const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
   local: {
+    name: {
+      type: String,
+      required: true,
+      index: true
+    },
     email: {
       type: String,
       required: true,
+      unique: true,
       index: true
     },
     password: {
@@ -42,7 +48,5 @@ const UserSchema = new Schema({
     default: Date.now
   }
 })
-
-UserSchema.pre('save')
 
 module.exports = mongoose.model('User', UserSchema)
