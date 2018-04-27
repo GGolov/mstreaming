@@ -4,8 +4,8 @@ const router = require('express').Router()
 const isAuthenticated = require('../authentication/middleware')
 
 module.exports = (passport) => {
-  router.get('/', (req, res) => {
-    
+  router.get('/:id', isAuthenticated, (req, res) => {
+    fs.createReadStream(__dirname + '/../music/' + req.params.id + '.mp3').pipe(res)
   })
 
   return router
