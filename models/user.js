@@ -46,7 +46,12 @@ const UserSchema = new Schema({
   registrationDate: {
     type: Date,
     default: Date.now
-  }
+  },
+
+  playlists: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Playlist'
+  }]
 })
 
 module.exports = mongoose.model('User', UserSchema)

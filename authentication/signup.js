@@ -39,7 +39,7 @@ module.exports = (passport) => {
               throw err
             }
 
-            console.log(`${new Date().toISOString()} ${newUser.email} registered as local`)
+            console.log(`${new Date().toISOString()} ${newUser.local.email} registered as local`)
 
             return done(null, newUser)
           })

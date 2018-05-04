@@ -7,6 +7,7 @@ const signup = require('./routes/signup')
 const profile = require('./routes/profile')
 const logout = require('./routes/logout')
 const music = require('./routes/music')
+const addAlbum = require('./routes/add-album')
 
 module.exports = (passport) => {
   router
@@ -16,6 +17,7 @@ module.exports = (passport) => {
     .use('/profile', profile(passport))
     .use('/logout', logout(passport))
     .use('/music', music(passport))
+    .use('/add-album', addAlbum(passport))
 
   return router
 }

@@ -1,0 +1,26 @@
+extends layout.pug
+
+block head
+  title Add album
+
+block content
+    .container
+    form(action="/add-album", method="post").card.center-card
+      .card-content
+        span.card-title Add album
+        .input-field
+          input(type="text", id="name", name="name", class="validate")
+          label(for="name") Name
+        .file-field.input-field
+          .btn
+            span Songs
+            input(type="file", id="songs", name="songs", multiple)
+          .file-path-wrapper
+            input.file-path(type="text")
+        if error
+          h6(class="red-text")= error
+      .card-action
+        input(type="submit", value="sign in", class="btn") 
+
+    script(src="./js/add-album.js")
+    
