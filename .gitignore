@@ -58,4 +58,6 @@ typings/
 .env
 
 # Music files
-music
+music/*.mp3
+music/*.ogg
+music/*.wav

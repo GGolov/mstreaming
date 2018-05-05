@@ -10,12 +10,14 @@ const UserSchema = new Schema({
       required: true,
       index: true
     },
+
     email: {
       type: String,
       required: true,
       unique: true,
       index: true
     },
+    
     password: {
       type: String,
       require: true
@@ -46,6 +48,11 @@ const UserSchema = new Schema({
   registrationDate: {
     type: Date,
     default: Date.now
+  },
+
+  subscribed: {
+    type: Boolean,
+    default: false
   },
 
   playlists: [{

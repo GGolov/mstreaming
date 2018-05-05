@@ -83,7 +83,9 @@ app
 
 // Session
   .use(session({
-    secret: 'secretkey'
+    secret: 'secretkey',
+    saveUninitialized: false,
+    resave: false
   }))
 
 // Passport
