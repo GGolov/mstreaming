@@ -1,7 +1,7 @@
 'use strict'
 const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/user')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 const isValidPassword = (user, password) => {
     return bcrypt.compareSync(password, user.local.password);
