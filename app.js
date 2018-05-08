@@ -19,7 +19,7 @@ const router = require('./router')
 
 // App init
 const app = express()
-const httpApp = express()
+// const httpApp = express()
 
 // Global variables and constants
 const port = process.env.PORT || 3000
@@ -31,11 +31,11 @@ const options = {
 mongoose.connect(dbConfig.localUrl)
 
 // Redirect to https URLs
-httpApp
-  .get('*', (req, res) => {
-    res.redirect(`https://${req.hostname}:${port}${req.url}`)
-  })
-  .listen(80)
+// httpApp
+//   .get('*', (req, res) => {
+//     res.redirect(`https://${req.hostname}:${port}${req.url}`)
+//   })
+//   .listen(80)
 
 // Template engine sets
 app
