@@ -24,8 +24,8 @@ const app = express()
 // Global variables and constants
 const port = process.env.PORT || 3000
 const options = {
-  key: fs.readFileSync(path.join(__dirname, 'keys/devkey.key')),
-  cert: fs.readFileSync(path.join(__dirname, 'keys/devcert.crt'))
+  key: fs.readFileSync(path.join(__dirname, 'keys/key.key')),
+  cert: fs.readFileSync(path.join(__dirname, 'keys/cert.crt'))
 }
 
 mongoose.connect(dbConfig.localUrl)
