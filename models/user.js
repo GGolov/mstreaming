@@ -55,6 +55,11 @@ const UserSchema = new Schema({
     default: false
   },
 
+  admin: {
+    type: Boolean,
+    default: false
+  },
+
   playlists: [{
     type: Schema.Types.ObjectId,
     ref: 'Playlist'

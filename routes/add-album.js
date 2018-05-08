@@ -4,7 +4,7 @@ const isAuthenticated = require('../authentication/middleware')
 
 module.exports = (passport) => {
   router
-    .get('/', (req, res) => {
+    .get('/', isAuthenticated, (req, res) => {
       res.render('add-album')
     })
     .post('/', (req, res) => {
