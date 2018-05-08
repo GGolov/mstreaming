@@ -5,7 +5,7 @@ const LocalStrategy = require('passport-local').Strategy
 const User = require('../models/user')
 
 const createHash = (password) => {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(12), null)
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(16), null)
 }
 
 module.exports = (passport) => {
