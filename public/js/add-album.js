@@ -22,7 +22,7 @@ songs.onchange = function(event) {
       titleInput.type = 'text'
       titleInput.name = 'title' + i
       titleInput.placeholder = filename
-      
+
       li.appendChild(titleInput)
     }
     else {

@@ -1,11 +1,11 @@
 'use strict'
 module.exports = (req, res, next) => {
     if (req.isAuthenticated()) {
-      console.log(req.user)
+      console.log('User authenticated')
       return next()
     }
 
-    console.log(`${new Date().toISOString()} user not authenticated`)
+    console.log(`User not authenticated`)
 
     res.redirect('/')
 }
