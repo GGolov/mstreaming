@@ -1,0 +1,15 @@
+extends layout.pug
+
+block head
+  title Explore
+
+block content
+  .container
+    h1 Explore
+    nav
+      .nav-wrapper.white
+        form(action="/search", method="post")
+          .input-field
+            input(type="search", id="search", required)
+            label.label-icon
+              i.material-icons.black-text search

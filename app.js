@@ -23,8 +23,8 @@ const app = express()
 // Global variables and constants
 const port = process.env.PORT || 3000
 const options = {
-  key: fs.readFileSync(path.join(__dirname, 'keys/key.key')),
-  cert: fs.readFileSync(path.join(__dirname, 'keys/cert.crt'))
+  key: fs.readFileSync(path.join(__dirname, 'keys/devkey.key')),
+  cert: fs.readFileSync(path.join(__dirname, 'keys/devcert.crt'))
 }
 
 mongoose.connect(dbConfig.localUrl)
@@ -72,12 +72,17 @@ app
   .use(passport.initialize())
   .use(passport.session())
 
+// User session persistance in the template engine
+  .use((req, res, next) => {
+    res.locals.user = req.user
+    next()
+  })
 // Router
   .use(router(passport))
 
 // Error 404
   .use((req, res, next) => {
-    res.status(404).redirect('/')
+    res.redirect('/')
   })
 
 // Passport configuration

@@ -6,4 +6,12 @@ block head
 block content
   .container
     h1 Profile
-    p= email
+    p
+      b Username: 
+      span #{user.local.name}
+    p
+      b Email: 
+      span #{user.local.email}
+    p
+      b Subscribed: 
+      span #{user.subscribed ? 'yes' : 'no'}

@@ -13,22 +13,12 @@ const check = require('express-validator/check').check
     At least one special character, (?=.*?[#?!@$%^&*-])
     Minimum eight in length .{8,} (with the anchors)
  */
-const passwordRegex = /\d^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).$/
-
 module.exports = (passport) => {
   router.get('/', (req, res) => {
     res.render('signup', { error: req.flash('error') })
   })
   
-  router.post('/', [
-    check(req.body.password)
-    .exists()
-    .matches(passwordRegex),
-
-    check(req.body.confirmPassword)
-    .exists()
-    .custom((value, { req }) => { value === req.body.password })
-  ], passport.authenticate('local-signup', {
+  router.post('/', passport.authenticate('local-signup', {
     successRedirect: '/profile',
     failureRedirect: '/signup',
     failureFlash: true

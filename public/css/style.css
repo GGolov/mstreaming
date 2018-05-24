@@ -1,4 +1,4 @@
-* {
+:root {
   font-family: 'Roboto', sans-serif;  
 }
 
@@ -20,5 +20,15 @@ main {
 .center-card {
   max-width: 500px;
   margin: auto;
-  margin-top: 15vh;
+  margin-top: 5vh;
+}
+
+header, main, footer {
+  padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
 }
