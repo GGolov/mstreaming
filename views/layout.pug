@@ -4,22 +4,18 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
-    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css")
-    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Roboto")
-    link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    link(rel="stylesheet", href="./lib/materialize/materialize.min.css")
+    link(rel="stylesheet", href="./lib/roboto.css")
+    link(rel="stylesheet", href="./lib/material-icons/material-icons.css")
     link(rel="stylesheet", href="./css/style.css")
     block head
   body
-    include navbar.pug
-
-    ul#slide-out.sidenav
-      li
-        .user-view
-          .background.blue.lighten-2
+    header
+      include navbar.pug
     
     main
       block content
 
     include footer.pug
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js")
+    script(src="./lib/materialize/materialize.min.js")
     script(src="./js/script.js")

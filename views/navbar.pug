@@ -1,18 +1,41 @@
 nav
+  a.sidenav-trigger(href='#' data-target='slide-out').hide-on-large
+    i.material-icons menu
   .nav-wrapper.indigo
-    a.left
-      i.material-icons menu
-    a.center.brand-logo Logo
-    ul.right
+    a.center.brand-logo(href="/") Logo
+
+ul#slide-out.sidenav.sidenav-fixed
+  if user
+    li
+      .user-view
+        .background.indigo
+        a(href='/profile')
+          span.white-text.name= user.local.name
+        a(href='/profile')
+          span.white-text.email= user.local.email
+    if user.admin
       li
-        a(href="/") Home
-      if email
-        li
-          a(href="/profile") Profile
-        li
-          a(href="/logout") Log out
-      else
-        li
-          a(href="/signup") Sign up
-        li
-          a(href="/signin") Sign in
+        a(href="/add-album") Add album
+      li
+        a(href="/admin-panel") Admin panel
+    li
+      a(href="/explore") Explore
+    li
+      a(href="/logout") Log out
+  else
+    li
+      a.subheader Not signed yet
+    li
+      a(href='/signup') Sign up
+    li
+      a(href='/signin') Sign in
+  li
+    a(href='#!')
+      i.material-icons cloud
+      | First Link With Ico n
+  li
+    a(href='#!') Second Link
+  li
+    .divider
+  li
+    a.waves-effect(href='#!') Third Link With Waves

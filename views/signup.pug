@@ -15,12 +15,13 @@ block content
           input(type="email", name="email", id="email", class="validate", required)
           label(for="email") E-mail
         .input-field
-          input(type="password", name="password", id="password", class="validate", required)
+          input(type="password", name="password", id="password", class="validate", minlength="8", required)
           label(for="password") Password
         .input-field
-          input(type="password", name="confirmPassword", id="confirmPassword", class="validate", required)
+          input(type="password", name="confirmPassword", id="confirmPassword", class="validate", minlength="8", required)
           label(for="confirmPassword") Confirm password
         if error
           p(class="red-text")= error
       .card-action
         input(type="submit", value="sign up", class="btn")
+        a(href="/signin", class="btn-flat teal-text") sign in

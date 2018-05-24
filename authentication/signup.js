@@ -25,7 +25,7 @@ module.exports = (passport) => {
      * Minimum eight in length .{8,} (with the anchors)
      */
     const regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
-const validationResult = require('express-validator/check').validationResult
+    const validationResult = require('express-validator/check').validationResult
 
     if (!validationResult(req).isEmpty()) {
       return done(null, false, req.flash('error', validationResult(req).mapped()))

@@ -61,3 +61,6 @@ typings/
 music/*.mp3
 music/*.ogg
 music/*.wav
+
+# Certificate
+keys

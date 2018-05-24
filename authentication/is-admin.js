@@ -7,5 +7,5 @@ module.exports = (req, res, next) => {
 
     console.log(`Admin not authenticated`)
 
-    res.redirect('/error/302')
+    res.redirect('/')
 }
