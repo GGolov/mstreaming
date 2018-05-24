@@ -3,7 +3,7 @@ const router = require('express').Router()
 
 module.exports = (passport) => {
   router.get('/', (req, res) => {
-    console.log(`${new Date().toISOString()} ${req.user.local.email} logged out`)
+    console.log(`${req.user.local.email} logged out`)
     req.logout()
     res.redirect('/')
   })

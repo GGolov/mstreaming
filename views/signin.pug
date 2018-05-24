@@ -9,12 +9,12 @@ block content
       .card-content
         span.card-title Login
         .input-field
-          input(type="email", id="email", name="email", class="validate")
+          input(type="email", id="email", name="email", class="validate" required)
           label(for="email") E-mail
         .input-field
-          input(type="password", id="password", name="password")
+          input(type="password", id="password", name="password" required)
           label(for="password") Password
         if error
-          h6(class="red-text")= error
+          p(class="red-text")= error
       .card-action
         input(type="submit", value="sign in", class="btn")

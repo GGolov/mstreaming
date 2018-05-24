@@ -20,8 +20,7 @@ block content
         .input-field
           input(type="password", name="confirmPassword", id="confirmPassword", class="validate", required)
           label(for="confirmPassword") Confirm password
-        if errors
-          each error in errors
-            h6(class="red-text")= error.msg
+        if error
+          p(class="red-text")= error
       .card-action
         input(type="submit", value="sign up", class="btn")
