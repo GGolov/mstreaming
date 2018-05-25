@@ -17,13 +17,23 @@ songs.onchange = function(event) {
     li.classList.add('collection-item')
 
     if (isAudio) {
+      var inputField = document.createElement('div')
       var titleInput = document.createElement('input')
+      var label = document.createElement('label')
   
-      titleInput.type = 'text'
-      titleInput.name = 'title' + i
-      titleInput.placeholder = filename
+      inputField.className = 'input-field'
 
-      li.appendChild(titleInput)
+      titleInput.type = 'text'
+      titleInput.id = 'title' + i
+      titleInput.name = 'title' + i
+
+      label.htmlFor = titleInput.id
+      label.textContent = 'Title of ' + filename
+
+      inputField.appendChild(titleInput)
+      inputField.appendChild(label)
+
+      li.appendChild(inputField)
     }
     else {
       li.textContent = filename + ' is not an audio file'
