@@ -6,9 +6,8 @@ const User = require('../models/user')
 module.exports = (passport) => {
   router
     .get('/', isAdmin, (req, res) => {
-      User
-        .find((err, users) => {
-          res.render('admin-panel', { users: users })
+      User.find((err, users) => {
+          res.render('users', { users: users })
         })
     })
 

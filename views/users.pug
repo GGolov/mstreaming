@@ -1,0 +1,33 @@
+extends layout.pug
+
+block head
+  title Admin - users
+
+block content
+  .container
+    h1 Users
+
+    table(class="highlight centered responsive-table")
+      thead
+        tr
+          th Name
+          th Email
+          th Subscribed
+          th Admin
+          th Registration date
+      tbody
+        each u in users
+          tr
+            td= u.local.name
+            td= u.local.email
+            td
+              if u.subscribed
+                i(class="material-icons green-text") check
+              else
+                i(class="material-icons red-text") close
+            td
+              if u.admin
+                i(class="material-icons green-text") check
+              else
+                i(class="material-icons red-text") close
+            td= u.registrationDate.toLocaleString()
