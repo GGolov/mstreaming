@@ -1,11 +1,12 @@
 var songs = document.querySelector('#songs')
+var cover = document.querySelector('#cover')
 
 songs.onchange = function(event) {
   var input = event.target
   var collection = document.querySelector('.collection')
 
   // Clears previous collection items
-  collection.childNodes = null
+  collection.innerHTML = ''
 
   console.log(input.files)
 
@@ -41,5 +42,15 @@ songs.onchange = function(event) {
     }
 
     collection.appendChild(li)
+  }
+}
+
+cover.onchange = function(event) {
+  var input = event.target
+
+  console.log(input.files)
+
+  if (!input.files[0].type.includes('image')) {
+    input.value = 'invalid file'
   }
 }

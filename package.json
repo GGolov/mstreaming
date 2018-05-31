@@ -28,5 +28,17 @@
     "passport-local": "^1.0.0",
     "pug": "^2.0.3",
     "spdy": "^3.4.7"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "music/*",
+      "views/*",
+      "public/*",
+      "README.md"
+    ],
+    "delay": "2500"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
   }
 }

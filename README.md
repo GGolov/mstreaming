@@ -1,2 +1,7 @@
 # mstreaming
-aaFnn6Kvng026s4WSFaFnn6Kvng026s4WSnn6Kvng026saFnaFnn6Kvng026s4WSn6Kvng026s4WS4WS
+## Setting up
+- Start the MongoDB Database Server
+- Run these commands in the terminal
+    $ npm i nodemon -g
+    $ git clone https://www.github.com/ggolov/mstreaming && cd mstreaming && npm i
+    $ nodemon app
