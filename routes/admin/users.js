@@ -7,7 +7,7 @@ module.exports = (passport) => {
   router
     .get('/', isAdmin, (req, res) => {
       User.find((err, users) => {
-          res.render('users', { users: users })
+          res.render('admin/users', { users: users })
         })
     })
 

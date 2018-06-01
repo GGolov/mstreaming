@@ -12,6 +12,11 @@ const ArtistSchema = new Schema({
 
   description: String,
 
+  insertionDate: {
+    type: Date,
+    default: Date.now
+  },
+
   albums: [{
     type: Schema.Types.ObjectId,
     ref: 'Album'

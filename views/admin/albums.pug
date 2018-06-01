@@ -1,4 +1,4 @@
-extends layout.pug
+extends ../layout.pug
 
 block head
   title Admin - albums
@@ -7,14 +7,22 @@ block content
   .container
     h2 Albums
 
-    form(action="/add-album", method="post").card.center-card
+    form(action="admin/albums/add", method="post").card.center-card
       .card-content
         span.card-title Add album
 
-        //- Album's title field
+        //- Album title field
         .input-field
           input(type="text", id="albumTitle", name="albumTitle", class="validate")
           label(for="albumTitle") Album title
+
+        //- Album artist field
+        .input-field
+          select(name="artist")
+            option(value="", disabled, selected) Choose an artist
+            each a in artists
+              option(value="#{a._id}")= a.nameOfArt
+          label Artist
         
         //- Songs upload
         .file-field.input-field

@@ -7,23 +7,28 @@ const AlbumSchema = new Schema({
     type: String,
     required: true
   },
-  
-  songs: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Song'
-  }],
 
-  artists: [{
+  artist: {
     type: Schema.Types.ObjectId,
     ref: 'Artist'
-  }],
+  },
 
   year: Number,
   
   cover: {
     type: String,
     default: '/public/img/covers/default.jpg'
-  }
+  },
+
+  insertionDate: {
+    type: Date,
+    default: Date.now
+  },
+
+  songs: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Song'
+  }]
 })
 
 module.exports = mongoose.model('Album', AlbumSchema)

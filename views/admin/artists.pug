@@ -1,0 +1,47 @@
+extends ../layout.pug
+
+block head
+  title Admin - artists
+
+block content
+  .container
+    h2 Artists
+
+    form(action="/admin/artists/add", method="post").card.center-card
+      .card-content
+        span.card-title Add artist
+
+        //- Artist's real name field
+        .input-field
+          input(type="text", id="realName", name="realName", class="validate")
+          label(for="realName") Real name
+        
+        //- Artist's name of art field
+        .input-field
+          input(type="text", id="nameOfArt", name="nameOfArt", class="validate", required)
+          label(for="nameOfArt") Name of art
+          span.helper-text Required
+        
+        //- Artist's description field
+        .input-field
+          textarea(type="text", id="description", name="description", class="validate materialize-textarea")
+          label(for="description") Description
+
+        if error
+          h6(class="red-text")= error
+
+      .card-action
+        input(type="submit", value="add", class="btn")
+
+    table(class="highlight centered responsive-table")
+      thead
+        tr
+          th Real name
+          th Name of art
+          th Description
+      tbody
+        each a in artists
+          tr
+            td= a.realName
+            td= a.nameOfArt
+            td.truncate= a.description

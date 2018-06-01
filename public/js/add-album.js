@@ -1,3 +1,8 @@
+document.addEventListener('DOMContentLoaded', function() {
+  var select = document.querySelector('select')
+  var selectInstance = M.FormSelect.init(select, null)
+})
+
 var songs = document.querySelector('#songs')
 var cover = document.querySelector('#cover')
 

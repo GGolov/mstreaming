@@ -13,15 +13,15 @@ const SongSchema = new Schema({
     required: true
   },
 
-  artists: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Artist'
-  }],
-
   label: String,
   order: Number,
   genre: String,
-  stars: Number
+  stars: Number,
+
+  album: {
+    type: Schema.Types.ObjectId,
+    ref: 'Album'
+  }
 })
 
 module.exports = mongoose.model('Song', SongSchema)
