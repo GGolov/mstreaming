@@ -1,0 +1,28 @@
+extends ../layout.pug
+
+block head
+  title Admin - songs
+
+block content
+  .container
+    h2 Songs
+
+    form(action="/admin/songs/add", method="post", enctype="multipart/form-data").card.center-card
+      .card-content
+        span.card-title Add songs
+
+        //- Songs upload
+        .file-field.input-field
+          .btn
+            span Songs
+            input(type="file", id="songs", name="songs", multiple, required)
+          .file-path-wrapper
+            input.file-path(type="text")
+
+        if error
+          h6(class="red-text")= error
+
+      .card-action
+        input(type="submit", value="upload", class="btn")
+
+  script(src="/js/add-album.js")

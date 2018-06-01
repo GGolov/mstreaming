@@ -13,15 +13,25 @@ const SongSchema = new Schema({
     required: true
   },
 
-  label: String,
+  artist: String,
+  publisher: String,
   order: Number,
   genre: String,
-  stars: Number,
+  year: Number,
+  duration: Number,
 
-  album: {
-    type: Schema.Types.ObjectId,
-    ref: 'Album'
-  }
+  stars: {
+    type: Number,
+    set: v => Math.round(Math.abs(v)),
+    max: 5
+  },
+
+  cover: {
+    type: String,
+    default: '/public/img/covers/default.png'
+  },
+
+  album: String
 })
 
 module.exports = mongoose.model('Song', SongSchema)

@@ -13,17 +13,19 @@ ul#slide-out.sidenav.sidenav-fixed
           span.white-text.name= user.local.name
         a(href='/profile')
           span.white-text.email= user.local.email
+    li
+      a(href="/explore") Explore
+    li
+      a(href="/playlists") My playlists
     if user.admin
       li
-        a(href="/admin-panel") Admin panel
+        .divider
+      li
+        a.subheader Administration
       li
         a(href="/admin/users") Users
       li
-        a(href="/admin/albums") Albums
-      li
-        a(href="/admin/artists") Artists
-    li
-      a(href="/explore") Explore
+        a(href="/admin/songs") Songs
   else
     li.indigo
       a.subheader.white-text Not signed yet
