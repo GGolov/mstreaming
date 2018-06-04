@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const SongSchema = new Schema({
-  fileName: {
+  filename: {
     type: String,
     required: true
   },
