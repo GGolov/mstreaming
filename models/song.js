@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const SongSchema = new Schema({
-  path: {
+  fileName: {
     type: String,
     required: true
   },
@@ -28,7 +28,7 @@ const SongSchema = new Schema({
 
   cover: {
     type: String,
-    default: '/public/img/covers/default.png'
+    default: 'default.png'
   },
 
   album: String
