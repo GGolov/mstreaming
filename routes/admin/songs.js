@@ -5,21 +5,9 @@ const Song = require('../../models/song')
 const multer = require('multer')
 const nodeID3 = require('node-id3')
 const fs = require('fs')
-const crypto = require('crypto')
+const storage = require('../../storage/storage')
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, __dirname + '/../../music')
-  },
-  filename: (req, file, cb) => {
-    const fileHash = crypto.createHash('MD5')
-
-    fileHash.update(Date.now().toString())
-
-    cb(null, fileHash.digest('latin1').toString() + '.mp3')
-  }
-})
-const upload = multer({ dest: 'music/', storage: storage })
+const upload = multer({ storage: storage })
 
 module.exports = (passport) => {
   router
@@ -28,11 +16,9 @@ module.exports = (passport) => {
     })
     .post('/add', isAdmin, upload.array('songs'), (req, res) => {
       const songs = req.files
-
+      
       songs.forEach((song) => {
-        console.log(song)
-        
-        nodeID3.read(song, (err, tags) => {
+        nodeID3.read('../../music/' + song.filename, (err, tags) => {
           if (err) {
             throw err
           }
@@ -44,14 +30,16 @@ module.exports = (passport) => {
             artist: tags.artist,
             publisher: tags.publisher,
             order: tags.trackNumber,
-            genre: genre,
-            year: year,
-            duration: length,
-            album: album,
+            genre: tags.genre,
+            year: tags.year,
+            duration: tags.length,
+            album: tags.album,
             filename: song.filename
           })
+
+          newSong.save()
         })
-          
+
         res.redirect('/admin/songs')
       })
     })
