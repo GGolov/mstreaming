@@ -27,8 +27,7 @@ const SongSchema = new Schema({
   },
 
   cover: {
-    type: String,
-    default: 'default.png'
+    type: Schema.Types.Buffer
   },
 
   album: String

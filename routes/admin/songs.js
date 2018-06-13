@@ -18,30 +18,29 @@ module.exports = (passport) => {
       const songs = req.files
       
       songs.forEach((song) => {
-        nodeID3.read('../../music/' + song.filename, (err, tags) => {
+        nodeID3.read('./music/' + song.filename, (err, tags) => {
           if (err) {
             throw err
           }
-
-          console.log(tags)
-
+          
           const newSong = new Song({
             title: tags.title,
             artist: tags.artist,
             publisher: tags.publisher,
-            order: tags.trackNumber,
+            order: tags.trackNumber.substring(0, tags.trackNumber.lastIndexOf('/')),
             genre: tags.genre,
-            year: tags.year,
+            year: tags.year.substring(0,4),
             duration: tags.length,
             album: tags.album,
-            filename: song.filename
+            filename: song.filename,
+            cover: tags.image.imageBuffer
           })
 
           newSong.save()
         })
-
-        res.redirect('/admin/songs')
       })
+
+      res.redirect('/admin/songs')
     })
 
   return router

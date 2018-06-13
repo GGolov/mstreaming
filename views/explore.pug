@@ -10,6 +10,23 @@ block content
       .nav-wrapper.white
         form(action="/search", method="post")
           .input-field
-            input(type="search", id="search", required)
+            input(type="search", id="search", name="search", autocomplete="off", required)
             label.label-icon
               i.material-icons.black-text search
+    
+    if results
+      ul.collection
+        each r in results
+          li.collection-item.avatar
+            img.circle(src="data:image/jpeg;base64," + r.cover.buffer)
+            span.title= r.title
+            p.grey-text= r.album
+            p.grey-text= r.artist
+    else
+      ul.collection
+        each r in all
+          li.collection-item.avatar
+            img.circle(src="data:image/jpeg;base64," + r.cover.buffer)
+            span.title= r.title
+            p.grey-text= r.album
+            p.grey-text= r.artist
